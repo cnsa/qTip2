@@ -1,35 +1,34 @@
 /*
- * qTip2 - Pretty powerful tooltips - v3.0.3-4-g
+ * qTip2 - Pretty powerful tooltips - v3.0.3-5-g
  * http://qtip2.com
  *
  * Copyright (c) 2017 
  * Released under the MIT licenses
  * http://jquery.org/license
  *
- * Date: Fri Feb 24 2017 12:52 GMT+0300+0300
+ * Date: Fri Feb 24 2017 05:43 GMT+0300+0300
  * Plugins: tips modal viewport svg imagemap ie6
  * Styles: core basic css3
  */
 /*global window: false, jQuery: false, console: false, define: false */
 
-/* Cache window, document, undefined */
-(function( window, document, undefined ) {
-
 // Uses CommonJS, AMD, or browser globals to create a jQuery plugin.
-(function( factory ) {
-	"use strict";
-	if(typeof jQuery !== 'undefined' && !jQuery.fn.qtip) {
-		factory(jQuery);
-	}
-	else if(typeof module !== 'undefined' && module.exports) {
-		module.exports = factory;
-	}
-	else if(typeof define === 'function' && define.amd) {
-		define(['jquery'], factory);
-	}
+(function (global, factory) {
+  "use strict";
+  if (typeof define === "function" && define.amd) {
+    define(['jquery'], factory.bind(this, global));
+  } else if (typeof global !== "undefined") {
+    factory(global, require('jquery'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.jquery);
+    global.qtip2 = mod.exports;
+  }
 }
-(function($) {
-	"use strict"; // Enable ECMAScript "strict" operation for this function. See more: http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
+(typeof window !== "undefined" ? window : this, function(window, $) {
+  "use strict"; // Enable ECMAScript "strict" operation for this function. See more: http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
 ;// Munge the primitives - Paul Irish tip
 var TRUE = true,
 FALSE = false,
@@ -1934,7 +1933,7 @@ if(!$.ui) {
 	};
 }
 ;// qTip version
-QTIP.version = '3.0.3-4-g';
+QTIP.version = '3.0.3-5-g';
 
 // Base ID for all qTips
 QTIP.nextid = 0;
@@ -3487,4 +3486,3 @@ CHECKS.ie6 = {
 	}
 };
 ;}));
-}( window, document ));
